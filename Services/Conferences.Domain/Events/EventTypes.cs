@@ -13,5 +13,6 @@ namespace Conferences.Domain.Events
         TicketPoolOpened,
         TicketPoolClosed,
         TicketPoolExtended,
+        TicketPoolPricesChanged
     }
 }

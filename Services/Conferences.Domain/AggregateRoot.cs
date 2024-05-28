@@ -13,7 +13,7 @@ namespace Conferences.Domain
         public List<BaseEvent> ChangesCommitedToEventStore { get; private set; } = new List<BaseEvent>();
 
         // set to -1 because state is not initialized
-        public int Version { get; private set; } = -1;
+        public int Version { get; set; } = -1;
 
 
 

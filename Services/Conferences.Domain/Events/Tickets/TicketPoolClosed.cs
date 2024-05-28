@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Conferences.Domain.Events
+namespace Conferences.Domain.Events.Tickets
 {
-    public class TicketPoolClosed: BaseEvent
+    public class TicketPoolClosed : BaseEvent
     {
-        public TicketPoolClosed(string conferenceId, int version): base(EventType.TicketPoolClosed, version)
+        public TicketPoolClosed(string conferenceId, int version) : base(EventType.TicketPoolClosed, version)
         {
             ConferenceId = conferenceId;
         }

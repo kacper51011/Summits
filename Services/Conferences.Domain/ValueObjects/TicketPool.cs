@@ -8,12 +8,10 @@ namespace Conferences.Domain.ValueObjects
 {
     public class TicketPool
     {
-        public int VipTicketsPool { get; private set; }
-        public int VipTicketsSold { get; private set; }
-        public int BasicTicketsPool { get; private set; }
-        public int BasicTicketsSold { get; private set; }
-        public decimal VipTicketPriceEur { get; private set; }
-        public decimal BasicTicketPriceEur { get; private set; }
+        public int VipTicketsPool { get; set; }
+        public int BasicTicketsPool { get; set; }
+        public decimal VipTicketPriceEur { get; set; }
+        public decimal BasicTicketPriceEur { get; set; }
 
 
     }
