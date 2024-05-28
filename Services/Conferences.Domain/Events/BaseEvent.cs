@@ -13,11 +13,12 @@ namespace Conferences.Domain.Events
         public int Version { get; set; }
         public DateTime TimeStampUtc { get; set; }
 
-        public BaseEvent(EventType type)
+        public BaseEvent(EventType type, int version)
         {
             Id = Guid.NewGuid().ToString();
             EventType = type;
             TimeStampUtc = DateTime.UtcNow;
+            Version = version;
         }
 
     }

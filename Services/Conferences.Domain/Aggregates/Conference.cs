@@ -1,5 +1,6 @@
 ﻿using Conferences.Domain.Entities;
 using Conferences.Domain.Events;
+using Conferences.Domain.Exceptions;
 using Conferences.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
@@ -34,13 +35,31 @@ namespace Conferences.Domain.Aggregates
             
         }
 
-        public void AddLecture(Lecture lecture)
+        public void CloseTicketPool()
         {
+            if(IsTicketPoolOpen is not true)
+            {
+                throw new DomainException("Ticket pool is already closed");
+            }
+
+            ApplyNewChange(new TicketPoolClosed(ConferenceId, Version + 1));
+
+
         }
 
-        public void RemoveLecture() 
+        public void OpenTicketPool()
         {
+            if (IsTicketPoolOpen is true)
+            {
+                throw new DomainException("Ticket pool is already opened");
+            }
 
+            ApplyNewChange(new TicketPoolClosed(ConferenceId, Version + 1));
+        }
+
+        public void ExtendTicketPool(int vipTicketsExtendedBy, int basicTicketsExtendedBy)
+        {
+            ApplyNewChange(new TicketPoolExtended(ConferenceId, vipTicketsExtendedBy, basicTicketsExtendedBy, Version + 1));
         }
 
 
