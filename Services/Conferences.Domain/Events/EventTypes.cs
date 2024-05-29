@@ -10,6 +10,8 @@ namespace Conferences.Domain.Events
     {
         ConferenceCreated,
         ConferenceUpdated,
+        ConferenceCanceled,
+        ConferenceEnded,
         TicketPoolOpened,
         TicketPoolClosed,
         TicketPoolExtended,

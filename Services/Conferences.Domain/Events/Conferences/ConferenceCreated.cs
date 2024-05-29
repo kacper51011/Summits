@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Conferences.Domain.Events
+namespace Conferences.Domain.Events.Conferences
 {
     public class ConferenceCreated : BaseEvent
     {
