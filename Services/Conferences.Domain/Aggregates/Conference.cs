@@ -3,6 +3,7 @@ using Conferences.Domain.Events;
 using Conferences.Domain.Events.Conferences;
 using Conferences.Domain.Events.Tickets;
 using Conferences.Domain.Exceptions;
+using Conferences.Domain.Validations;
 using Conferences.Domain.ValueObjects;
 
 namespace Conferences.Domain.Aggregates
@@ -27,10 +28,39 @@ namespace Conferences.Domain.Aggregates
             ConferenceId = conferenceId;
         }
 
-        public Conference(string name, string description, TicketPool ticketPool, List<Lecture> lectures, DateTime startDateUtc, DateTime endDateUtc, bool hasEnded, bool hasBeenCanceled)
+        public Conference(string name, string description, TicketPool ticketPool, List<Lecture> lectures, DateTime startDateUtc, DateTime endDateUtc)
         {
+            this.StartAndEndDatesValidation(startDateUtc, endDateUtc);
             var conferenceCreated = new ConferenceCreated(Guid.NewGuid().ToString(), name, description, lectures, ticketPool, true, startDateUtc, endDateUtc, DateTime.UtcNow, Version + 1);
             ApplyNewChange(conferenceCreated);
+        }
+        public void Apply(ConferenceCreated @event)
+        {
+            Name = @event.Name;
+            Description = @event.Description;
+            TicketPool = @event.TicketPool;
+            Created = @event.Created;
+            HasEnded = false;
+            HasBeenCanceled = false;
+            Lectures = @event.Lectures;
+            StartDateUtc = @event.StartDateUtc;
+            EndDateUtc = @event.EndDateUtc;
+
+        }
+        public void OpenTicketPool()
+        {
+            if (IsTicketPoolOpen is true)
+            {
+                throw new DomainException("Ticket pool is already opened");
+            }
+
+            ApplyNewChange(new TicketPoolClosed(ConferenceId, Version + 1));
+        }
+
+        public void Apply(TicketPoolOpened @event)
+        {
+            IsTicketPoolOpen = true;
+            Version = @event.Version;
         }
 
         public void CloseTicketPool()
@@ -51,24 +81,11 @@ namespace Conferences.Domain.Aggregates
             Version = @event.Version;
         }
 
-        public void OpenTicketPool()
-        {
-            if (IsTicketPoolOpen is true)
-            {
-                throw new DomainException("Ticket pool is already opened");
-            }
 
-            ApplyNewChange(new TicketPoolClosed(ConferenceId, Version + 1));
-        }
-
-        public void Apply(TicketPoolOpened @event)
-        {
-            IsTicketPoolOpen = true;
-            Version = @event.Version;
-        }
 
         public void ExtendTicketPool(int vipTicketsExtendedBy, int basicTicketsExtendedBy)
         {
+            this.DefaultValidation();
             ApplyNewChange(new TicketPoolExtended(ConferenceId, vipTicketsExtendedBy, basicTicketsExtendedBy, Version + 1));
         }
         public void Apply(TicketPoolExtended @event)
@@ -80,6 +97,7 @@ namespace Conferences.Domain.Aggregates
 
         public void ChangeTicketPoolPrices(decimal vipTicketPriceEur, decimal basicTicketPriceEur)
         {
+            this.DefaultValidation();
             ApplyNewChange(new TicketPoolPricesChanged(ConferenceId, vipTicketPriceEur, basicTicketPriceEur, Version + 1));
 
         }
@@ -93,6 +111,7 @@ namespace Conferences.Domain.Aggregates
 
         public void EndConference()
         {
+            this.DefaultValidation();
             ApplyNewChange(new ConferenceEnded(ConferenceId,Version + 1));
         }
 
@@ -109,6 +128,7 @@ namespace Conferences.Domain.Aggregates
 
         public void Apply(ConferenceCanceled @event)
         {
+            IsTicketPoolOpen = false;
             HasBeenCanceled = true;
             Version = @event.Version;
         }
