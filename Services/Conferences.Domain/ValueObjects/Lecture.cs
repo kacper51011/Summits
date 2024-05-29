@@ -12,7 +12,7 @@ namespace Conferences.Domain.Entities
         public DateTime EndTimeUtc { get; set; }
         public string Thema { get; set; }
         public string Description { get; set; }
-        public string Speaker { get; set; }
+        public string SpeakerId { get; set; }
         
     }
 
