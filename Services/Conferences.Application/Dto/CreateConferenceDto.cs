@@ -10,10 +10,10 @@ namespace Conferences.Application.Dto
     {
         public string Name {  get; set; }
             public string Description { get; set; }
-            public TicketPoolDto ticketPool { get; set; }
-            public List<LectureDto> lectures {  get; set; }
-            public DateTime startDateUtc { get; set; }
-            public DateTime endDateUtc { get; set; }
+            public TicketPoolDto TicketPool { get; set; }
+            public List<LectureDto> Lectures {  get; set; }
+            public DateTime StartDateUtc { get; set; }
+            public DateTime EndDateUtc { get; set; }
     }
 
     public class TicketPoolDto
