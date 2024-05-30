@@ -7,5 +7,6 @@ namespace Conferences.Api.Controllers
     [ApiController]
     public class LecturesController : ControllerBase
     {
+
     }
 }

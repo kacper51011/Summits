@@ -24,7 +24,7 @@ namespace Conferences.Domain
             ChangesNotCommitedToEventStore.Clear();
         }
 
-        private void ApplyChangeToAggregate(BaseEvent eventToApply, bool isNew)
+        protected void ApplyChangeToAggregate(BaseEvent eventToApply, bool isNew)
         {
             dynamic dynamicThis = this;
             dynamicThis.Apply(eventToApply);
