@@ -1,8 +1,14 @@
+using Conferences.Application.Commands.Conferences;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.AddMediatR((o)=> o.RegisterServicesFromAssemblyContaining(typeof(CreateConferenceCommand)));
+
+builder.Services.AddDbContext<ApplicationDbContext>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

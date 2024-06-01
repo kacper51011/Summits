@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conferences.Api", "Services\Conferences.Api\Conferences.Api.csproj", "{CF21F20E-7CE7-4727-8EE5-AFB0CD0D84DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Conferences.Api", "Services\Conferences.Api\Conferences.Api.csproj", "{CF21F20E-7CE7-4727-8EE5-AFB0CD0D84DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conferences.Application", "Services\Conferences.Application\Conferences.Application.csproj", "{D2D4256B-C010-4722-A366-6C0A22885D66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Conferences.Application", "Services\Conferences.Application\Conferences.Application.csproj", "{D2D4256B-C010-4722-A366-6C0A22885D66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conferences.Domain", "Services\Conferences.Domain\Conferences.Domain.csproj", "{5349BE6A-A160-4171-BD8A-20EB03CDA60E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Conferences.Domain", "Services\Conferences.Domain\Conferences.Domain.csproj", "{5349BE6A-A160-4171-BD8A-20EB03CDA60E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conferences.Infrastructure", "Services\Conferences.Infrastructure\Conferences.Infrastructure.csproj", "{5C223769-7E7F-4AEB-8C4F-CE81C804076F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Conferences.Infrastructure", "Services\Conferences.Infrastructure\Conferences.Infrastructure.csproj", "{5C223769-7E7F-4AEB-8C4F-CE81C804076F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Conferences", "Conferences", "{AC13C78F-A79B-4FDC-9B6D-5DDD3FA90F95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +38,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CF21F20E-7CE7-4727-8EE5-AFB0CD0D84DB} = {AC13C78F-A79B-4FDC-9B6D-5DDD3FA90F95}
+		{D2D4256B-C010-4722-A366-6C0A22885D66} = {AC13C78F-A79B-4FDC-9B6D-5DDD3FA90F95}
+		{5349BE6A-A160-4171-BD8A-20EB03CDA60E} = {AC13C78F-A79B-4FDC-9B6D-5DDD3FA90F95}
+		{5C223769-7E7F-4AEB-8C4F-CE81C804076F} = {AC13C78F-A79B-4FDC-9B6D-5DDD3FA90F95}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {084866C3-E612-416F-9B93-C11B58695B18}
