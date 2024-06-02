@@ -30,7 +30,6 @@ namespace Conferences.Domain.Aggregates
 
         public Conference(string name, string description, TicketPool ticketPool, List<Lecture> lectures, DateTime startDateUtc, DateTime endDateUtc)
         {
-            this.StartAndEndDatesValidation(startDateUtc, endDateUtc);
             var conferenceCreated = new ConferenceCreated(Guid.NewGuid().ToString(), name, description, lectures, ticketPool, true, startDateUtc, endDateUtc, DateTime.UtcNow, Version + 1);
             ApplyNewChange(conferenceCreated);
         }
