@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Conferences.Domain.Interfaces
 {
-    public interface IConferenceBuilder: INameStep, IDescriptionStep, ITicketPoolStep, ILecturesStep
+    public interface IConferenceBuilder: INameStep, IDescriptionStep, ITicketPoolStep, ILecturesStep, IDatesStep, IBuildStep
     {
         public ErrorType ErrorType { get; set; }
     }
@@ -54,6 +54,6 @@ namespace Conferences.Domain.Interfaces
 
     public interface IBuildStep
     {
-        public Result<string> Build();
+        public Result<Conference> Build();
     }
 }
