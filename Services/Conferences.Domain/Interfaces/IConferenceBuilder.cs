@@ -1,5 +1,6 @@
 ﻿using Conferences.Domain.Aggregates;
 using Conferences.Domain.Entities;
+using Conferences.Domain.Errors;
 using Conferences.Domain.Utilities;
 using Conferences.Domain.ValueObjects;
 using System;

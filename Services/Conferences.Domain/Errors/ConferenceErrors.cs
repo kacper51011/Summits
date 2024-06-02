@@ -5,18 +5,8 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Conferences.Domain.Utilities
+namespace Conferences.Domain.Errors
 {
-    public sealed record ErrorType(string message)
-    {
-        public static readonly ErrorType None = new(string.Empty);
-    }
-
-    public static class TicketPoolErrors
-    {
-        public static readonly ErrorType TicketPoolAlreadyClosed = new("Ticket pool has already been closed");
-        public static readonly ErrorType TicketPoolAlreadyOpened = new("Ticket pool has already been opened");
-    }
 
     public static class ConferenceErrors
     {
@@ -25,5 +15,10 @@ namespace Conferences.Domain.Utilities
         public static readonly ErrorType ConferenceTooEarly = new("Conference need to be planned at least one day earlier");
         public static readonly ErrorType ConferenceEndBeforeStarts = new("Conference can not end before it starts!");
         public static readonly ErrorType ConferenceTooShort = new("Conference must take at least one hour");
+
+        public static readonly ErrorType ConferenceNameTooShort = new("Name of Conference is too short");
+        public static readonly ErrorType ConferenceNameTooLong = new("Name of Conference is too long");
+        public static readonly ErrorType ConferenceDescriptionTooShort = new("Description of Conference is too short");
+        public static readonly ErrorType ConferenceDescriptionTooLong = new("Description of Conference is too long");
     }
 }
