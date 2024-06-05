@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  conferences.api:
+    image: ${DOCKER_REGISTRY-}conferencesapi
+    build:
+      context: .
+      dockerfile: Services/Conferences.Api/Dockerfile

@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Conferences.Infrastructure"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Conferences", "Conferences", "{AC13C78F-A79B-4FDC-9B6D-5DDD3FA90F95}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{F072B65B-D3DA-4A42-8F38-211131E6C424}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{5C223769-7E7F-4AEB-8C4F-CE81C804076F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C223769-7E7F-4AEB-8C4F-CE81C804076F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C223769-7E7F-4AEB-8C4F-CE81C804076F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F072B65B-D3DA-4A42-8F38-211131E6C424}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F072B65B-D3DA-4A42-8F38-211131E6C424}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F072B65B-D3DA-4A42-8F38-211131E6C424}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F072B65B-D3DA-4A42-8F38-211131E6C424}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
