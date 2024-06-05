@@ -27,22 +27,26 @@ namespace Conferences.Domain.Builders
 
         public Result<Conference> Build()
         {
-            if(ErrorType != ErrorType.None)
+            if (ErrorType != ErrorType.None)
             {
                 return Result.Failure<Conference>(ErrorType);
             }
-            var createdConference =  new Conference(Name, Description, TicketPool, Lectures, StartDateTimeUtc, EndDateTimeUtc);
+            var createdConference = new Conference(Name, Description, TicketPool, Lectures, StartDateTimeUtc, EndDateTimeUtc);
 
             return Result.Success(createdConference, 201);
         }
 
         public IBuildStep SetDates(DateTime startDateTimeUtc, DateTime endDateTimeUtc)
         {
-            this.ValidateDates(startDateTimeUtc, endDateTimeUtc);
-            if(ErrorType == ErrorType.None)
+            var error = this.ValidateDates(startDateTimeUtc, endDateTimeUtc);
+            if (error == ErrorType.None)
             {
                 StartDateTimeUtc = startDateTimeUtc;
                 EndDateTimeUtc = endDateTimeUtc;
+            }
+            else
+            {
+                ErrorType = error;
             }
 
             return this;
@@ -51,10 +55,14 @@ namespace Conferences.Domain.Builders
 
         public ITicketPoolStep SetDescription(string description)
         {
-            this.ValidateDescription(description);
-            if (ErrorType == ErrorType.None)
+            var error = this.ValidateDescription(description);
+            if (error == ErrorType.None)
             {
                 Description = description;
+            }
+            else
+            {
+                ErrorType = error;
             }
 
             return this;
@@ -62,10 +70,14 @@ namespace Conferences.Domain.Builders
 
         public IDatesStep SetLectures(List<Lecture> lectures)
         {
-            this.ValidateLectures(lectures);
+            var error = this.ValidateLectures(lectures);
             if (ErrorType == ErrorType.None)
             {
                 Lectures = lectures;
+            }
+            else
+            {
+                ErrorType = error;
             }
 
             return this;
@@ -73,21 +85,31 @@ namespace Conferences.Domain.Builders
 
         public IDescriptionStep SetName(string name)
         {
-            this.ValidateName(name);
-            if (ErrorType == ErrorType.None)
+            var error = this.ValidateName(name);
+            if (error == ErrorType.None)
             {
                 Name = name;
             }
+            else
+            {
+                ErrorType = error;
+            }
+
             return this;
         }
 
         public ILecturesStep SetTicketPool(TicketPool ticketPool)
         {
-            this.ValidateTicketPool(ticketPool);
-            if (ErrorType == ErrorType.None)
+            var error = this.ValidateTicketPool(ticketPool);
+            if (error == ErrorType.None)
             {
                 TicketPool = ticketPool;
             }
+            else
+            {
+                ErrorType = error;
+            }
+
             return this;
 
         }

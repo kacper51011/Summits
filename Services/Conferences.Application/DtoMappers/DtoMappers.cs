@@ -2,31 +2,27 @@
 using Conferences.Domain.Aggregates;
 using Conferences.Domain.Entities;
 using Conferences.Domain.ValueObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Conferences.Application.DtoMappers
 {
     public static class DtoMappers
     {
-        public static Conference MapToConference(this CreateConferenceDto dto)
-        {
-            //mapping ticketpool
-            var ticketPool = new TicketPool() 
-            {
-                BasicTicketPriceEur = dto.TicketPool.BasicTicketPriceEur,
-                VipTicketPriceEur = dto.TicketPool.VipTicketPriceEur,
-                BasicTicketsPool = dto.TicketPool.BasicTicketsPool,
-                VipTicketsPool = dto.TicketPool.VipTicketsPool
 
+        public static TicketPool MapToTicketPool(this TicketPoolDto dto)
+        {
+            return new TicketPool()
+            {
+                BasicTicketPriceEur = dto.BasicTicketPriceEur,
+                VipTicketPriceEur = dto.VipTicketPriceEur,
+                BasicTicketsPool = dto.BasicTicketsPool,
+                VipTicketsPool = dto.VipTicketsPool
             };
 
-            //mapping lectures dto
+        }
+        public static List<Lecture> MapToLectures(this List<LectureDto> dto)
+        {
             var lectures = new List<Lecture>();
-            foreach (var item in dto.Lectures)
+            foreach (var item in dto)
             {
                 var itemToAdd = new Lecture()
                 {
@@ -38,9 +34,7 @@ namespace Conferences.Application.DtoMappers
                 };
                 lectures.Add(itemToAdd);
             }
-
-            // returning conference/ throwing domainException
-            return new Conference(dto.Name, dto.Description, ticketPool, lectures, dto.StartDateUtc, dto.EndDateUtc);
+            return lectures;
         }
     }
 }
