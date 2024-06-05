@@ -10,8 +10,10 @@ namespace Conferences.Domain.Interfaces
     public interface IConferenceRepository
     {
         public Task<List<Conference>> GetAllConferences();
-        public Task<Conference> GetConferenceById(string conferenceId);
+        public Task<Conference?> GetConferenceById(string conferenceId);
         public Task CreateOrUpdateConference(Conference conference);
+
+        public Task SaveChangesAsync();
 
 
         

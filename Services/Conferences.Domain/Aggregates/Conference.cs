@@ -1,4 +1,6 @@
 ﻿using Conferences.Domain.Entities;
+using Conferences.Domain.Errors;
+using Conferences.Domain.Errors.TicketPools;
 using Conferences.Domain.Events;
 using Conferences.Domain.Events.Conferences;
 using Conferences.Domain.Events.Tickets;
@@ -51,7 +53,7 @@ namespace Conferences.Domain.Aggregates
         {
             if (IsTicketPoolOpen is true)
             {
-                return Result.Failure();
+                return Result.Failure<Conference>(TicketPoolErrors.TicketPoolAlreadyOpened);
             }
             ApplyChangeToAggregate(new TicketPoolClosed(ConferenceId, Version + 1), isFromEventStore);
             return Result.Success(this);
@@ -67,7 +69,7 @@ namespace Conferences.Domain.Aggregates
         {
             if (IsTicketPoolOpen is not true)
             {
-                return Result.Failure();
+                return Result.Failure<Conference>(TicketPoolErrors.TicketPoolAlreadyClosed);
             }
 
             ApplyChangeToAggregate(new TicketPoolClosed(ConferenceId, Version + 1), isFromEventStore);
@@ -86,7 +88,11 @@ namespace Conferences.Domain.Aggregates
 
         public Result<Conference> ExtendTicketPool(int vipTicketsExtendedBy, int basicTicketsExtendedBy, bool isFromEventStore)
         {
-            this.DefaultValidation();
+            var error = this.DefaultValidation();
+            if (error != ErrorType.None)
+            {
+                return Result.Failure<Conference>(error);
+            }
             ApplyChangeToAggregate(new TicketPoolExtended(ConferenceId, vipTicketsExtendedBy, basicTicketsExtendedBy, Version + 1), isFromEventStore);
             return Result.Success(this);
         }
@@ -99,7 +105,11 @@ namespace Conferences.Domain.Aggregates
 
         public Result<Conference> ChangeTicketPoolPrices(decimal vipTicketPriceEur, decimal basicTicketPriceEur, bool isFromEventStore)
         {
-            this.DefaultValidation();
+            var error = this.DefaultValidation();
+            if (error != ErrorType.None)
+            {
+                return Result.Failure<Conference>(error);
+            }
             ApplyChangeToAggregate(new TicketPoolPricesChanged(ConferenceId, vipTicketPriceEur, basicTicketPriceEur, Version + 1), isFromEventStore);
             return Result.Success(this);
 
@@ -114,7 +124,11 @@ namespace Conferences.Domain.Aggregates
 
         public Result<Conference> EndConference(bool isFromEventStore)
         {
-            this.DefaultValidation();
+            var error = this.DefaultValidation();
+            if (error != ErrorType.None)
+            {
+                return Result.Failure<Conference>(error);
+            }
             ApplyChangeToAggregate(new ConferenceEnded(ConferenceId,Version + 1), isFromEventStore);
             return Result.Success(this);
         }
@@ -127,6 +141,11 @@ namespace Conferences.Domain.Aggregates
 
         public Result<Conference> CancelConference(bool isFromEventStore)
         {
+            var error = this.DefaultValidation();
+            if (error != ErrorType.None)
+            {
+                return Result.Failure<Conference>(error);
+            }
             ApplyChangeToAggregate(new ConferenceCanceled(ConferenceId, Version + 1), isFromEventStore);
             return Result.Success(this);
         }
