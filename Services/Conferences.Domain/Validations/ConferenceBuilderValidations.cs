@@ -1,6 +1,9 @@
 ﻿using Conferences.Domain.Builders;
 using Conferences.Domain.Entities;
 using Conferences.Domain.Errors;
+using Conferences.Domain.Errors.Conference;
+using Conferences.Domain.Errors.Lectures;
+using Conferences.Domain.Errors.TicketPools;
 using Conferences.Domain.ValueObjects;
 
 namespace Conferences.Domain.Validations
@@ -16,12 +19,12 @@ namespace Conferences.Domain.Validations
         {
             if (string.IsNullOrEmpty(name) || name.Length < minName)
             {
-                builder.ErrorType = ConferenceErrors.ConferenceNameTooShort;
+                builder.ErrorType = ConferenceNameErrors.ConferenceNameTooShort;
                 return;
             }
             if (name.Length > maxName)
             {
-                builder.ErrorType = ConferenceErrors.ConferenceNameTooLong;
+                builder.ErrorType = ConferenceNameErrors.ConferenceNameTooLong;
                 return;
             }
 
@@ -33,12 +36,12 @@ namespace Conferences.Domain.Validations
         {
             if (string.IsNullOrEmpty(description) || description.Length < minDesc)
             {
-                builder.ErrorType = ConferenceErrors.ConferenceDescriptionTooShort;
+                builder.ErrorType = ConferenceDescriptionErrors.ConferenceDescriptionTooShort;
                 return;
             }
             if (description.Length > maxDesc)
             {
-                builder.ErrorType = ConferenceErrors.ConferenceDescriptionTooLong;
+                builder.ErrorType = ConferenceDescriptionErrors.ConferenceDescriptionTooLong;
                 return;
             }
 
@@ -50,15 +53,15 @@ namespace Conferences.Domain.Validations
         {
             if (startDate < DateTime.UtcNow.AddDays(1))
             {
-                builder.ErrorType = ConferenceErrors.ConferenceTooEarly;
+                builder.ErrorType = ConferenceDatesErrors.ConferenceTooEarly;
             }
             if (endDate < startDate)
             {
-                builder.ErrorType = ConferenceErrors.ConferenceEndBeforeStarts;
+                builder.ErrorType = ConferenceDatesErrors.ConferenceEndBeforeStarts;
             }
             if (endDate - startDate < TimeSpan.FromHours(1))
             {
-                builder.ErrorType = ConferenceErrors.ConferenceTooShort;
+                builder.ErrorType = ConferenceDatesErrors.ConferenceTooShort;
             }
         }
 

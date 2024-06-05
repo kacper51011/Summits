@@ -1,4 +1,4 @@
-﻿namespace Conferences.Domain.Errors
+﻿namespace Conferences.Domain.Errors.Lectures
 {
     public static class LecturesErrors
     {
