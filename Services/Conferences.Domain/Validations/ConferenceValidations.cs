@@ -1,4 +1,6 @@
 ﻿using Conferences.Domain.Aggregates;
+using Conferences.Domain.Errors;
+using Conferences.Domain.Errors.Conference;
 using Conferences.Domain.Exceptions;
 using System;
 using System.Collections.Generic;
@@ -10,33 +12,38 @@ namespace Conferences.Domain.Validations
 {
     internal static class ConferenceValidations
     {
-        internal static void DefaultValidation(this Conference conference)
+        internal static ErrorType DefaultValidation(this Conference conference)
         {
             if (conference.HasBeenCanceled)
             {
-                throw new DomainException("Can not modify canceled conference");
+                return ConferenceTerminationsExceptions.ConferenceAlreadyCanceled;
             }
             if (conference.HasEnded)
             {
-                throw new DomainException("Can not modify already ended conference");
+                return ConferenceTerminationsExceptions.ConferenceAlreadyEnded;
             }
+            return ErrorType.None;
 
         }
 
-        internal static void StartAndEndDatesValidation(this Conference conference, DateTime startUtc, DateTime endUtc)
+        internal static ErrorType StartAndEndDatesValidation(this Conference conference, DateTime startUtc, DateTime endUtc)
         {
             if (startUtc < DateTime.UtcNow.AddDays(1))
             {
-                throw new DomainException("Conference need to be planned at least one day earlier");
+                return ConferenceDatesErrors.ConferenceTooEarly;
             }
             if (endUtc < startUtc)
             {
-                throw new DomainException("Conference can not end before it starts!");
+                return ConferenceDatesErrors.ConferenceEndBeforeStarts;
+
             }
             if (endUtc - startUtc < TimeSpan.FromHours(1))
             {
-                throw new DomainException("Conference must take at least one hour");
+                return ConferenceDatesErrors.ConferenceTooShort;
+
             }
+
+            return ErrorType.None;
 
         }
 
