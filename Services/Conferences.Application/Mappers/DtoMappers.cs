@@ -3,7 +3,7 @@ using Conferences.Domain.Aggregates;
 using Conferences.Domain.Entities;
 using Conferences.Domain.ValueObjects;
 
-namespace Conferences.Application.DtoMappers
+namespace Conferences.Application.Mappers
 {
     public static class DtoMappers
     {

@@ -1,5 +1,5 @@
 ﻿using Conferences.Application.Dto;
-using Conferences.Application.DtoMappers;
+using Conferences.Application.Mappers;
 using Conferences.Domain.Aggregates;
 using Conferences.Domain.Builders;
 using Conferences.Domain.Errors;
