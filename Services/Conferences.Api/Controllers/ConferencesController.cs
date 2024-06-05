@@ -37,7 +37,7 @@ namespace Conferences.Api.Controllers
         }
 
         [HttpPost("{conferenceId}/AddNewTickets")]
-        public async Task<ActionResult> AddNewTicketsToConferenceTicketPool(string conferenceId, AddTicketsDto addTicketsDto)
+        public async Task<ActionResult> AddNewTicketsToConferenceTicketPool(string conferenceId, ExtendTicketsPoolDto addTicketsDto)
         {
             return Ok();
         }

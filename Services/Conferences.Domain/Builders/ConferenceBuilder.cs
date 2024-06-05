@@ -52,7 +52,7 @@ namespace Conferences.Domain.Builders
         public ITicketPoolStep SetDescription(string description)
         {
             this.ValidateDescription(description);
-            if (ErrorType != ErrorType.None)
+            if (ErrorType == ErrorType.None)
             {
                 Description = description;
             }

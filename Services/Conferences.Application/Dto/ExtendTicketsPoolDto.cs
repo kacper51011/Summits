@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Conferences.Application.Dto
 {
-    public class AddTicketsDto
+    public class ExtendTicketsPoolDto
     {
         public int BasicTicketsToAdd { get; set; }
         public int VipTicketsToAdd { get; set; }

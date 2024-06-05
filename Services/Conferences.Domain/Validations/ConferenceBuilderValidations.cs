@@ -15,63 +15,56 @@ namespace Conferences.Domain.Validations
 
         private const int minDesc = 20;
         private const int maxDesc = 1500;
-        public static void ValidateName(this ConferenceBuilder builder, string name)
+        public static ErrorType ValidateName(this ConferenceBuilder builder, string name)
         {
             if (string.IsNullOrEmpty(name) || name.Length < minName)
             {
-                builder.ErrorType = ConferenceNameErrors.ConferenceNameTooShort;
-                return;
+                return ConferenceNameErrors.ConferenceNameTooShort;
             }
             if (name.Length > maxName)
             {
-                builder.ErrorType = ConferenceNameErrors.ConferenceNameTooLong;
-                return;
+                return ConferenceNameErrors.ConferenceNameTooLong;
             }
 
-            builder.Name = name;
+            return ErrorType.None;
 
         }
 
-        public static void ValidateDescription(this ConferenceBuilder builder, string description)
+        public static ErrorType ValidateDescription(this ConferenceBuilder builder, string description)
         {
             if (string.IsNullOrEmpty(description) || description.Length < minDesc)
             {
-                builder.ErrorType = ConferenceDescriptionErrors.ConferenceDescriptionTooShort;
-                return;
+                return ConferenceDescriptionErrors.ConferenceDescriptionTooShort;
             }
             if (description.Length > maxDesc)
             {
-                builder.ErrorType = ConferenceDescriptionErrors.ConferenceDescriptionTooLong;
-                return;
+                return ConferenceDescriptionErrors.ConferenceDescriptionTooLong;
             }
 
-            builder.Description = description;
+            return ErrorType.None;
 
         }
 
-        public static void ValidateDates(this ConferenceBuilder builder, DateTime startDate, DateTime endDate)
+        public static ErrorType ValidateDates(this ConferenceBuilder builder, DateTime startDate, DateTime endDate)
         {
             if (startDate < DateTime.UtcNow.AddDays(1))
             {
-                builder.ErrorType = ConferenceDatesErrors.ConferenceTooEarly;
+                return ConferenceDatesErrors.ConferenceTooEarly;
             }
             if (endDate < startDate)
             {
-                builder.ErrorType = ConferenceDatesErrors.ConferenceEndBeforeStarts;
+                return ConferenceDatesErrors.ConferenceEndBeforeStarts;
             }
             if (endDate - startDate < TimeSpan.FromHours(1))
             {
-                builder.ErrorType = ConferenceDatesErrors.ConferenceTooShort;
+                return ConferenceDatesErrors.ConferenceTooShort;
             }
+
+            return ErrorType.None;
         }
 
-        public static void ValidateLectures(this ConferenceBuilder builder, List<Lecture> lectures)
+        public static ErrorType ValidateLectures(this ConferenceBuilder builder, List<Lecture> lectures)
         {
-            // expensive validation - early return
-            if (builder.ErrorType != ErrorType.None)
-            {
-                return;
-            }
 
             var startDates = new List<DateTime>() { builder.StartDateTimeUtc };
             var endDates = new List<DateTime>() { builder.EndDateTimeUtc };
@@ -80,28 +73,29 @@ namespace Conferences.Domain.Validations
             {
                 if (startDates.Any(x => x <= lecture.EndTimeUtc && x >= lecture.StartTimeUtc))
                 {
-                    builder.ErrorType = LecturesErrors.TimeCollapsing;
-                    return;
+                    return LecturesErrors.TimeCollapsing;
                 }
 
                 if (endDates.Any(x => x <= lecture.EndTimeUtc && x >= lecture.StartTimeUtc))
                 {
-                    builder.ErrorType = LecturesErrors.TimeCollapsing;
-                    return;
+                    return LecturesErrors.TimeCollapsing;
                 }
 
                 startDates.Add(lecture.StartTimeUtc);
                 endDates.Add(lecture.EndTimeUtc);
             }
+            
+            return ErrorType.None;
         }
 
-        public static void ValidateTicketPool(this ConferenceBuilder builder, TicketPool ticketPool)
+        public static ErrorType ValidateTicketPool(this ConferenceBuilder builder, TicketPool ticketPool)
         {
 
             if (ticketPool.BasicTicketPriceEur < 1 || ticketPool.VipTicketsPool < 1)
             {
-                builder.ErrorType = TicketPoolErrors.TicketsNumberLessThanOne;
+                return TicketPoolErrors.TicketsNumberLessThanOne;
             }
+            return ErrorType.None;
         }
     }
 }
