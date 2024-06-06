@@ -25,6 +25,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Conferences.Application\Conferences.Application.csproj" />
+    <ProjectReference Include="..\Conferences.Domain\Conferences.Domain.csproj" />
+    <ProjectReference Include="..\Conferences.Infrastructure\Conferences.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

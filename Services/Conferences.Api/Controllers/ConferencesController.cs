@@ -23,7 +23,6 @@ namespace Conferences.Api.Controllers
         }
 
         [HttpGet]
-
         public async Task<ActionResult<List<GetConferenceResponseDto>>> GetAllConferences()
         {
             return Ok();

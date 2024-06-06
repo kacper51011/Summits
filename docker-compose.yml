@@ -6,3 +6,22 @@ services:
     build:
       context: .
       dockerfile: Services/Conferences.Api/Dockerfile
+
+  conferencesdb:
+     image: mcr.microsoft.com/mssql/server:2019-latest
+     ports:
+     - 1433:1433
+     environment:
+       ACCEPT_EULA: Y
+       MSSQL_SA_PASSWORD: RandomPassword123
+       MSSQL_PID: EXPRESS
+
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
