@@ -15,6 +15,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Conferences", "Conferences"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{F072B65B-D3DA-4A42-8F38-211131E6C424}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventStore.Api", "EventStore\EventStore.Api\EventStore.Api.csproj", "{85DD11FD-EC3B-4846-AB95-BEA35892B118}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EventStore", "EventStore", "{F7F0953D-399C-4EEF-9829-194BDA343817}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +45,10 @@ Global
 		{F072B65B-D3DA-4A42-8F38-211131E6C424}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F072B65B-D3DA-4A42-8F38-211131E6C424}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F072B65B-D3DA-4A42-8F38-211131E6C424}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85DD11FD-EC3B-4846-AB95-BEA35892B118}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85DD11FD-EC3B-4846-AB95-BEA35892B118}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85DD11FD-EC3B-4846-AB95-BEA35892B118}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85DD11FD-EC3B-4846-AB95-BEA35892B118}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +58,7 @@ Global
 		{D2D4256B-C010-4722-A366-6C0A22885D66} = {AC13C78F-A79B-4FDC-9B6D-5DDD3FA90F95}
 		{5349BE6A-A160-4171-BD8A-20EB03CDA60E} = {AC13C78F-A79B-4FDC-9B6D-5DDD3FA90F95}
 		{5C223769-7E7F-4AEB-8C4F-CE81C804076F} = {AC13C78F-A79B-4FDC-9B6D-5DDD3FA90F95}
+		{85DD11FD-EC3B-4846-AB95-BEA35892B118} = {F7F0953D-399C-4EEF-9829-194BDA343817}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {084866C3-E612-416F-9B93-C11B58695B18}
