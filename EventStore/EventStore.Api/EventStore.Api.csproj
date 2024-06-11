@@ -8,7 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.25.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Configurations\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EventStore.Application\EventStore.Application.csproj" />
+    <ProjectReference Include="..\EventStore.Core\EventStore.Core.csproj" />
+    <ProjectReference Include="..\EventStore.Infrastructure\EventStore.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
