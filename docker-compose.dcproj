@@ -6,7 +6,7 @@
     <DockerPublishLocally>False</DockerPublishLocally>
     <ProjectGuid>f072b65b-d3da-4a42-8f38-211131e6c424</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
-    <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
+    <DockerServiceUrl>https://localhost:9000/swagger</DockerServiceUrl>
     <DockerServiceName>conferences.api</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>

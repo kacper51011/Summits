@@ -13,10 +13,12 @@ builder.Services.AddControllers();
 
 builder.Services.AddMediatR((o)=> o.RegisterServicesFromAssemblyContaining(typeof(CreateConferenceCommand)));
 
-builder.Services.AddSingleton<IConferenceRepository, ConferenceRepository>();
+builder.Services.AddScoped<IConferenceRepository, ConferenceRepository>();
 
 // because this project serves as an example, i decided to not store my passes locally,
 //
+//builder.Services.RegisterDb();
+
 builder.Services.RegisterDb();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

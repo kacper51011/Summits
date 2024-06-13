@@ -5,9 +5,9 @@ namespace Conferences.Api.Mappers
 {
     public static class ResultMappers
     {
-        public static ProblemDetails ToProblemDetails(this Result result)
-        {
+        //public static ProblemDetails ToProblemDetails(this Result result)
+        //{
 
-        }
+        //}
     }
 }

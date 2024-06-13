@@ -1,6 +1,8 @@
 
 
+using EventStore.Core.Interfaces;
 using EventStore.Infrastructure.Db;
+using EventStore.Infrastructure.EventModelRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.Configure<MongoOptions>(builder.Configuration.GetSection("Mongo"));
+
+builder.Services.AddSingleton<IEventModelRepository, EventModelRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

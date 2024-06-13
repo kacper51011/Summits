@@ -1,4 +1,5 @@
-﻿using EventStore.Api.Models;
+﻿using EventStore.Application.Dtos;
+using EventStore.Core.Interfaces;
 using EventStore.Core.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,23 +10,43 @@ namespace EventStore.Api.Controllers
     [ApiController]
     public class EventsController : ControllerBase
     {
+        private readonly IEventModelRepository _eventModelRepository;
+        public EventsController(IEventModelRepository eventModelRepository)
+        {
+            _eventModelRepository = eventModelRepository;
+            
+        }
+
         [HttpGet]
         [Route("{aggregateId}")]
         public async Task<ActionResult<List<EventModel>>> GetEventsForAggregate(string aggregateId)
         {
-            return Ok(new List<EventModel>());
+            var returnList = await _eventModelRepository.GetEventsForAggregate(aggregateId);
+            return returnList;
         }
 
         [HttpGet]
         [Route("{aggregateId}/{version}")]
         public async Task<ActionResult<List<EventModel>>> GetEventsForAggregateFromVersion(string aggregateId, int version)
         {
-            return Ok(new List<EventModel>());
+            var returnList = await _eventModelRepository.GetEventsForAggregateFromVersion(aggregateId, version);
+            return returnList;
         }
 
-        public async Task<ActionResult> SaveEventForAggregate(EventModel eventModel)
+        [HttpPost]
+        public async Task<ActionResult> SaveEventForAggregate(EventModelDto eventModel)
         {
-            return Ok();
+            var event1 = new EventModel()
+            {
+                EventData = eventModel.EventData,
+                EventType = eventModel.EventType,
+                AggregateId = eventModel.AggregateId,
+                TimeStampUtc = eventModel.TimeStampUtc,
+                Version = eventModel.Version,
+            };
+            await _eventModelRepository.SaveEventForAggregate(event1);
+
+            return Ok(eventModel.AggregateId);
         }
     }
 }

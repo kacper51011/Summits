@@ -10,7 +10,7 @@ namespace Conferences.Api.Extensions
         {
             var server = "conferencesdb";
             var user = "SA";
-            var database = "conferences";
+            var database = "conferencesdb";
             var password = "ExamplePassword123";
 
 

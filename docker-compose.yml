@@ -6,6 +6,18 @@ services:
     build:
       context: .
       dockerfile: Services/Conferences.Api/Dockerfile
+    ports:
+    - 8000:8000
+    - 9000:9000
+
+  eventstore.api:
+    image: ${DOCKER_REGISTRY-}eventstoreapi
+    build:
+      context: .
+      dockerfile: EventStore/EventStore.Api/Dockerfile
+    ports:
+    - 8001:8001
+    - 9001:9001
 
   conferencesdb:
      image: mcr.microsoft.com/mssql/server:2019-latest
@@ -13,7 +25,7 @@ services:
      - 1433:1433
      environment:
        ACCEPT_EULA: Y
-       MSSQL_SA_PASSWORD: RandomPassword123
+       MSSQL_SA_PASSWORD: ExamplePassword123
        MSSQL_PID: EXPRESS
 
   rabbitmq:
@@ -25,3 +37,25 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+
+
+
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+     - 27017:27017
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8079:8079
+      - 808
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
