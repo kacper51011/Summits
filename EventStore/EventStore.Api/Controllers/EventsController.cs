@@ -1,8 +1,13 @@
 ﻿using EventStore.Application.Dtos;
+using EventStore.Core.Events.Conferences;
 using EventStore.Core.Interfaces;
 using EventStore.Core.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
+using System.Text.Json;
+using System.Text.Json.Nodes;
+using System.Text.Json.Serialization;
 
 namespace EventStore.Api.Controllers
 {
@@ -11,10 +16,11 @@ namespace EventStore.Api.Controllers
     public class EventsController : ControllerBase
     {
         private readonly IEventModelRepository _eventModelRepository;
-        public EventsController(IEventModelRepository eventModelRepository)
+        private readonly IEventTypeFinder _eventTypeFinder;
+        public EventsController(IEventModelRepository eventModelRepository, IEventTypeFinder eventTypeFinder)
         {
             _eventModelRepository = eventModelRepository;
-            
+            _eventTypeFinder = eventTypeFinder;
         }
 
         [HttpGet]
@@ -34,17 +40,33 @@ namespace EventStore.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> SaveEventForAggregate(EventModelDto eventModel)
+        public async Task<ActionResult> SaveEventForAggregate(EventModel eventModel)
         {
-            var event1 = new EventModel()
+            var modelito = new ConferenceEnded()
             {
-                EventData = eventModel.EventData,
-                EventType = eventModel.EventType,
-                AggregateId = eventModel.AggregateId,
-                TimeStampUtc = eventModel.TimeStampUtc,
-                Version = eventModel.Version,
+                AggregateId = "123",
+                EventType = "ConferenceEnded",
+                ConferenceId = "123",
+                TimeStampUtc = DateTime.UtcNow,
+                Version = 0,
+
+
             };
-            await _eventModelRepository.SaveEventForAggregate(event1);
+
+            var jsoned = JsonSerializer.Serialize(modelito);
+
+            var parsed = JsonObject.Parse(jsoned);
+
+            var eventTypeStr = parsed["EventType"].ToString();
+
+            var typeToDeserialize = _eventTypeFinder.GetTypeOfEvent(eventTypeStr);
+            //var serialized = JsonSerializer.Serialize<ConferenceEnded>(modelito);
+            var deserialized = JsonSerializer.Deserialize(jsoned, typeToDeserialize!);
+            
+
+            await _eventModelRepository.SaveEventForAggregate(deserialized as EventModel);
+            
+
 
             return Ok(eventModel.AggregateId);
         }

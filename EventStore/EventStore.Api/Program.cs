@@ -1,12 +1,15 @@
 
 
 using EventStore.Core.Interfaces;
+using EventStore.Core.Utils;
 using EventStore.Infrastructure.Db;
 using EventStore.Infrastructure.EventModelRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddSingleton<IEventTypeFinder, EventTypeFinder>();
 
 builder.Services.AddControllers();
 builder.Services.Configure<MongoOptions>(builder.Configuration.GetSection("Mongo"));
