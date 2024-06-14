@@ -18,6 +18,12 @@ namespace EventStore.Infrastructure.EventModelRepository
             var database = mongoClient.GetDatabase(options.Value.DatabaseName);
 
             _collection = database.GetCollection<EventModel>(options.Value.CollectionName);
+
+            // index on aggregateId
+            var indexKeys = Builders<EventModel>.IndexKeys.Ascending(x => x.AggregateId).Ascending(x => x.Version);
+            var indexModel = new CreateIndexModel<EventModel>(indexKeys);
+
+            _collection.Indexes.CreateOne(indexModel);
         }
 
         public async Task<List<EventModel>> GetEventsForAggregate(string aggregateId)
