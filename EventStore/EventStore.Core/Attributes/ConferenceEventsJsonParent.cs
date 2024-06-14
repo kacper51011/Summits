@@ -9,28 +9,28 @@ using System.Threading.Tasks;
 
 namespace EventStore.Core.Attributes
 {
+    [AttributeUsage(AttributeTargets.Class)]
     public class ConferenceEventsJsonParent: Attribute
     {
-        public BsonKnownTypesAttribute ConferenceCreatedMongoMap {  get; set; }
-        public JsonDerivedTypeAttribute ConferenceCreatedJsonMap { get; set; }
+        //public BsonKnownTypesAttribute ConferenceCreatedMongoMap {  get; set; }
+        //public JsonDerivedTypeAttribute ConferenceCreatedJsonMap { get; set; }
 
-        public BsonKnownTypesAttribute ConferenceCanceledMongoMap { get; set; }
-        public JsonDerivedTypeAttribute ConferenceCanceledJsonMap { get; set; }
+        //public BsonKnownTypesAttribute ConferenceCanceledMongoMap { get; set; }
+        //public JsonDerivedTypeAttribute ConferenceCanceledJsonMap { get; set; }
 
-        public BsonKnownTypesAttribute ConferenceEndedMongoMap { get; set; }
-        public JsonDerivedTypeAttribute ConferenceEndedJsonMap { get; set; }
+        public static BsonKnownTypesAttribute ConferenceEndedMongoMap = new(typeof(ConferenceEnded));
+        public static JsonDerivedTypeAttribute ConferenceEndedJsonMap = new(typeof(ConferenceEnded));
+        //public BsonKnownTypesAttribute TicketPoolClosedMongoMap { get; set; }
+        //public JsonDerivedTypeAttribute TicketPoolClosedJsonMap { get; set; }
 
-        public BsonKnownTypesAttribute TicketPoolClosedMongoMap { get; set; }
-        public JsonDerivedTypeAttribute TicketPoolClosedJsonMap { get; set; }
+        //public BsonKnownTypesAttribute TicketPoolExtendedMongoMap { get; set; }
+        //public JsonDerivedTypeAttribute TicketPoolExtendedJsonMap { get; set; }
 
-        public BsonKnownTypesAttribute TicketPoolExtendedMongoMap { get; set; }
-        public JsonDerivedTypeAttribute TicketPoolExtendedJsonMap { get; set; }
+        //public BsonKnownTypesAttribute TicketPoolOpenedMongoMap { get; set; }
+        //public JsonDerivedTypeAttribute TicketPoolOpenedJsonMap { get; set; }
 
-        public BsonKnownTypesAttribute TicketPoolOpenedMongoMap { get; set; }
-        public JsonDerivedTypeAttribute TicketPoolOpenedJsonMap { get; set; }
-
-        public BsonKnownTypesAttribute TicketPoolPricesChangedMongoMap { get; set; }
-        public JsonDerivedTypeAttribute TicketPoolPricesChangedJsonMap { get; set; }
+        //public BsonKnownTypesAttribute TicketPoolPricesChangedMongoMap { get; set; }
+        //public JsonDerivedTypeAttribute TicketPoolPricesChangedJsonMap { get; set; }
 
 
 
@@ -38,28 +38,28 @@ namespace EventStore.Core.Attributes
 
         public ConferenceEventsJsonParent()
         {
-            ConferenceCreatedMongoMap = new BsonKnownTypesAttribute(typeof(ConferenceCreated));
-            ConferenceCreatedJsonMap = new JsonDerivedTypeAttribute(typeof(ConferenceCreated));
+            //ConferenceCreatedMongoMap = new BsonKnownTypesAttribute(typeof(ConferenceCreated));
+            //ConferenceCreatedJsonMap = new JsonDerivedTypeAttribute(typeof(ConferenceCreated));
 
-            ConferenceEndedMongoMap = new BsonKnownTypesAttribute(typeof(ConferenceEnded));
-            ConferenceEndedJsonMap = new JsonDerivedTypeAttribute(typeof (ConferenceEnded));
+            //ConferenceEndedMongoMap = new BsonKnownTypesAttribute(typeof(ConferenceEnded));
+            //ConferenceEndedJsonMap = new JsonDerivedTypeAttribute(typeof (ConferenceEnded));
 
-            ConferenceCanceledMongoMap = new BsonKnownTypesAttribute(typeof(ConferenceCanceled));
-            ConferenceCanceledJsonMap = new JsonDerivedTypeAttribute (typeof (ConferenceCanceled));
+            //ConferenceCanceledMongoMap = new BsonKnownTypesAttribute(typeof(ConferenceCanceled));
+            //ConferenceCanceledJsonMap = new JsonDerivedTypeAttribute (typeof (ConferenceCanceled));
 
-            TicketPoolClosedMongoMap = new BsonKnownTypesAttribute(typeof (TicketPoolClosed));
-            TicketPoolClosedJsonMap = new JsonDerivedTypeAttribute(typeof (TicketPoolClosed));
-
-
-            TicketPoolExtendedMongoMap = new BsonKnownTypesAttribute(typeof(TicketPoolExtended));
-            TicketPoolExtendedJsonMap = new JsonDerivedTypeAttribute(typeof(TicketPoolExtended));
+            //TicketPoolClosedMongoMap = new BsonKnownTypesAttribute(typeof (TicketPoolClosed));
+            //TicketPoolClosedJsonMap = new JsonDerivedTypeAttribute(typeof (TicketPoolClosed));
 
 
-            TicketPoolOpenedMongoMap = new BsonKnownTypesAttribute(typeof(TicketPoolOpened));
-            TicketPoolOpenedJsonMap = new JsonDerivedTypeAttribute(typeof(TicketPoolOpened));
+            //TicketPoolExtendedMongoMap = new BsonKnownTypesAttribute(typeof(TicketPoolExtended));
+            //TicketPoolExtendedJsonMap = new JsonDerivedTypeAttribute(typeof(TicketPoolExtended));
 
-            TicketPoolPricesChangedMongoMap = new BsonKnownTypesAttribute(typeof(TicketPoolPricesChanged));
-            TicketPoolPricesChangedJsonMap = new JsonDerivedTypeAttribute(typeof(TicketPoolPricesChanged));
+
+            //TicketPoolOpenedMongoMap = new BsonKnownTypesAttribute(typeof(TicketPoolOpened));
+            //TicketPoolOpenedJsonMap = new JsonDerivedTypeAttribute(typeof(TicketPoolOpened));
+
+            //TicketPoolPricesChangedMongoMap = new BsonKnownTypesAttribute(typeof(TicketPoolPricesChanged));
+            //TicketPoolPricesChangedJsonMap = new JsonDerivedTypeAttribute(typeof(TicketPoolPricesChanged));
 
         }
     }

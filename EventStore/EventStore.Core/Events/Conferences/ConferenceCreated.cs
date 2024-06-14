@@ -9,9 +9,6 @@ namespace EventStore.Core.Events.Conferences
 {
     public class ConferenceCreated : BaseEvent
     {
-        public ConferenceCreated() : base(nameof(ConferenceCreated), 0)
-        {
-        }
 
         public string ConferenceId { get; private set; }
         public string Name { get; private set; }

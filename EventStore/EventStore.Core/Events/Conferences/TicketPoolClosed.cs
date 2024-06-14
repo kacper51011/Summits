@@ -9,10 +9,7 @@ namespace EventStore.Core.Events.Conferences
 {
     public class TicketPoolClosed : BaseEvent
     {
-        public TicketPoolClosed(string conferenceId, int version) : base(nameof(TicketPoolClosed), version)
-        {
-            ConferenceId = conferenceId;
-        }
+
         public string ConferenceId { get; set; }
     }
 }

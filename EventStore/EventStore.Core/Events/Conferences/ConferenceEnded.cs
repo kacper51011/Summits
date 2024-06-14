@@ -7,13 +7,8 @@ using System.Threading.Tasks;
 
 namespace EventStore.Core.Events.Conferences
 {
-    public class ConferenceEnded : BaseEvent
+    public class ConferenceEnded : EventModel
     {
         public string ConferenceId { get; set; }
-        public ConferenceEnded(string conferenceId, int version) : base(nameof(ConferenceEnded), version)
-        {
-            ConferenceId = conferenceId;
-
-        }
     }
 }
