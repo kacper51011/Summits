@@ -13,6 +13,5 @@ namespace EventStore.Application.Dtos
         public int Version { get; set; }
         public string EventType { get; set; }
         public DateTime TimeStampUtc { get; set; }
-        public BaseEvent EventData { get; set; }
     }
 }

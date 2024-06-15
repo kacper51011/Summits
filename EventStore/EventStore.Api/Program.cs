@@ -1,5 +1,7 @@
 
 
+using EventStore.Application.Configs;
+using EventStore.Application.Consumers;
 using EventStore.Core.Interfaces;
 using EventStore.Core.Utils;
 using EventStore.Infrastructure.Db;
@@ -13,6 +15,9 @@ builder.Services.AddSingleton<IEventTypeFinder, EventTypeFinder>();
 
 builder.Services.AddControllers();
 builder.Services.Configure<MongoOptions>(builder.Configuration.GetSection("Mongo"));
+builder.Services.Configure<RabbitMQOptions>(builder.Configuration.GetSection("RabbitMQ"));
+
+builder.Services.AddHostedService<RabbitMQEventConsumer>();
 
 builder.Services.AddSingleton<IEventModelRepository, EventModelRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
