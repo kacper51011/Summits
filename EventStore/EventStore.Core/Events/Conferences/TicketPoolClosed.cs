@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EventStore.Core.Events.Conferences
 {
-    public class TicketPoolClosed : BaseEvent
+    public class TicketPoolClosed : EventModel
     {
 
         public string ConferenceId { get; set; }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EventStore.Core.Events.Conferences
 {
-    public class ConferenceCreated : BaseEvent
+    public class ConferenceCreated : EventModel
     {
 
         public string ConferenceId { get; private set; }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EventStore.Core.Events.Conferences
 {
-    public class TicketPoolPricesChanged : BaseEvent
+    public class TicketPoolPricesChanged : EventModel
     {
         public string ConferenceId { get; set; }
         public decimal VipTicketPriceEur { get; set; }
